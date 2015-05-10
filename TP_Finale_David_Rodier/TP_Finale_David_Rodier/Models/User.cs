@@ -9,7 +9,6 @@ namespace TP_Finale_David_Rodier.Models
     public class User : Labo2.Class.SqlExpressWrapper
     {
         public int ID { get; set; }
-        public string Type { get; set; }
         [Required]
         [StringLength(50, MinimumLength = 3, ErrorMessage="Votre nom d'usager doit être entre 3 et 50 caractères")]
         public string Username { get; set; }
@@ -38,7 +37,6 @@ namespace TP_Finale_David_Rodier.Models
             ID = int.Parse(this["ID"]);
             Username = this["USERNAME"];
             Password = this["PASSWORD"];
-            Type = this["TYPE"];
         }
         public override void Insert()
         {
@@ -51,9 +49,14 @@ namespace TP_Finale_David_Rodier.Models
             //    GetValues(); 
             return reader.HasRows;
         }
+        public bool Check_Password(String username, String password)
+        {
+            QuerySQL("SELECT * FROM " + SQLTableName + " WHERE USERNAME = '" + username + "' AND PASSWORD='" + password + "'");
+            return reader.HasRows;
+        }
         public override void Update()
         {
-            UpdateRecord(ID, Username, Password, Type);
+            UpdateRecord(ID, Username, Password);
         }
     }
 

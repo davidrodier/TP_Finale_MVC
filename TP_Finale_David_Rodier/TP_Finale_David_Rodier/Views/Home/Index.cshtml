@@ -1,31 +1,49 @@
-﻿@{
+﻿@model TP_Finale_David_Rodier.Models.Game
+@{
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-</div>
+<style>
+    img{
+        width:75px;
+    }
+    span{
+        font-family:Arial;
+        font-size:large;
+    }
+    td{
+        border:black 1px;
+        border-style:double;
+    }
+    .stars_td{
+        border:hidden;
+    }
+    .stars{
+        font-size:larger;
+        cursor:pointer;
+    }
+</style>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+<script type="text/javascript">
+    function ChangeStar_Over(num, name){
+        document.getElementById("Star_" + num + "_" + name).textContent = "&#9733";
+    }
+    function ChangeStar_Out(num, name) {
+        document.getElementById("Star_" + num + "_" + name).textContent = "&#9734";
+    }
+</script>
+
+<h2>Ratings</h2>
+
+<table>
+    @while (Model.Next()){
+        <tr><td><img src=@Model.Image_Path /></td>
+            <td><span>@Model.Name made by @Model.Creator</span></td>
+            <td id="Star_1_@Model.Name" class="stars_td" style="border-left: double black 1px"><span class="stars" onmouseover="ChangeStar(1, @Model.Name)" onmouseout="ChangeStar(1, @Model.Name)">&#9734 </span></td>
+            <td id="Star_2_@Model.Name" class="stars_td"><span class="stars" onmouseover="ChangeStar(2, @Model.Name)" onmouseout="ChangeStar(2, @Model.Name)">&#9734 </span></td>
+            <td id="Star_3_@Model.Name" class="stars_td"><span class="stars" onmouseover="ChangeStar(3, @Model.Name)" onmouseout="ChangeStar(3, @Model.Name)">&#9734 </span></td>
+            <td id="Star_4_@Model.Name" class="stars_td"><span class="stars" onmouseover="ChangeStar(4, @Model.Name)" onmouseout="ChangeStar(4, @Model.Name)">&#9734 </span></td>
+            <td id="Star_5_@Model.Name" class="stars_td"><span class="stars" onmouseover="ChangeStar(5, @Model.Name)" onmouseout="ChangeStar(5, @Model.Name)">&#9734 </span></td>
+        </tr>
+    }
+</table>

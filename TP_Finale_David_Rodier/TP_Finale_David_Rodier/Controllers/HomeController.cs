@@ -11,6 +11,37 @@ namespace TP_Finale_David_Rodier.Controllers
     {
         public ActionResult Index()
         {
+            Game games = new Game(Session["MainDB"]);
+            games.SelectAll();
+
+            return View(games);
+        }
+        [HttpGet]
+        public ActionResult Connexion()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Connexion(Login log)
+        {
+            User users = new User(Session["MainDB"]);
+            if (users.Username_Exist(log.Username))
+            {
+                if (users.Check_Password(log.Username, log.Password))
+                {
+                    Session["LogedUser"] = log.Username;
+                    ViewBag.Error = "";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewBag.Error = "Mauvais mot de passe";
+                }
+            }
+            else
+            {
+                ViewBag.Error = "Mauvais nom d'usager";
+            }
             return View();
         }
         [HttpGet]
