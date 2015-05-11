@@ -1,11 +1,11 @@
-﻿@model TP_Finale_David_Rodier.Models.Game
+﻿@model IEnumerable<TP_Finale_David_Rodier.Models.Game>
 @{
     ViewBag.Title = "Home Page";
 }
 
 <style>
     img {
-        width: 75px;
+        width: 78px;
     }
 
     span {
@@ -14,12 +14,18 @@
     }
 
     td {
-        border: black 1px;
-        border-style: double;
+        border: #222288 8px;
+        border-style: outset;
     }
 
     .stars_td {
-        border: hidden;
+        border-top: #222288 8px;
+        border-bottom: #222288 8px;
+        border-style: outset;
+        border-left: hidden;
+        border-right: hidden;
+        padding-right: 3px;
+        padding-left: 3px;
     }
 
     .stars {
@@ -27,36 +33,97 @@
         cursor: pointer;
         width: 20px;
     }
+    .Page_1{
+        display:none;
+    }
 </style>
 
 <script type="text/javascript">
-    function Image_Over(Image, Nb) {
+    function Image_Over(Image, Nb, Name) {
         Image.src = "/Images/Star_Filled.png";
         for (var i = 1; i < Nb; i++) {
-            document.getElementById("Star_" + i).src = "/Images/Star_Filled.png";
+            document.getElementById("Star_" + i + "_" + Name).src = "/Images/Star_Filled.png";
         }
     }
-    function Image_Out(Image, Nb) {
+    function Image_Out(Image, Nb, Name) {
         Image.src = "/Images/Star_Empty.png";
         for (var i = 1; i < Nb; i++) {
-            document.getElementById("Star_" + i).src = "/Images/Star_Empty.png";
+            document.getElementById("Star_" + i + "_" + Name).src = "/Images/Star_Empty.png";
         }
+    }
+    function Set_Image(Rating, Name) {
+        for(var i = 1; i<Rating; i++) {
+            document.getElementById("Star_" + i + "_" + Name).src = "/Images/Star_Filled.png"
+        }
+    }
+    function Next_Page() {
+        
     }
 </script>
 
 <h2>Ratings</h2>
 
 <table>
-    @while (Model.Next())
+    @for (int i = 0; i < @Model.Count() ;i++)
     {
-        <tr>
-            <td><img src=@Model.Image_Path /></td>
-            <td><span>@Model.Name made by @Model.Creator</span></td>
-            <td class="stars_td" style="border-left:black 1px"><img id="Star_1" class="stars" src="/Images/Star_Empty.png" onmouseover="Image_Over(this, 1)" onmouseout="Image_Out(this, 1)" /></td>
-            <td class="stars_td"><img id="Star_2" class="stars" src="/Images/Star_Empty.png" onmouseover="Image_Over(this, 2)" onmouseout="Image_Out(this, 2)" /></td>
-            <td class="stars_td"><img id="Star_3" class="stars" src="/Images/Star_Empty.png" onmouseover="Image_Over(this, 3)" onmouseout="Image_Out(this, 3)" /></td>
-            <td class="stars_td"><img id="Star_4" class="stars" src="/Images/Star_Empty.png" onmouseover="Image_Over(this, 4)" onmouseout="Image_Out(this, 4)" /></td>
-            <td class="stars_td"><img id="Star_5" class="stars" src="/Images/Star_Empty.png" onmouseover="Image_Over(this, 5)" onmouseout="Image_Out(this, 5)" /></td>
-        </tr>
+        if ((i % 20) == 0){
+            ViewBag.Page++;
+        }
+    <tr class="Page_@ViewBag.Page">
+        <td><img src=@Model.ElementAt(i).Image_Path /></td>
+        <td><span>@Model.ElementAt(i).Name made by @Model.ElementAt(i)Creator</span></td>
+        @*  *@
+        <td class="stars_td" style="border-left: outset #222288 8px; ">
+        <img 
+             id="Star_1_@Model.ElementAt(i)Name" 
+             class="stars" 
+             src="/Images/Star_Empty.png" 
+             onmouseover="Image_Over(this, 1, '@Model.ElementAt(i)Name')" 
+             onmouseout="Image_Out(this, 1, '@Model.ElementAt(i)Name')" 
+        />
+        </td>
+        @*  *@
+        <td class="stars_td">
+        <img 
+             id="Star_2_@Model.ElementAt(i)Name" 
+             class="stars" 
+             src="/Images/Star_Empty.png" 
+             onmouseover="Image_Over(this, 2, '@Model.ElementAt(i)Name')" 
+             onmouseout="Image_Out(this, 2, '@Model.ElementAt(i)Name')" 
+        />
+        </td>
+        @*  *@
+        <td class="stars_td">
+        <img 
+             id="Star_3_@Model.ElementAt(i)Name" 
+             class="stars" 
+             src="/Images/Star_Empty.png" 
+             onmouseover="Image_Over(this, 3, '@Model.ElementAt(i)Name')" 
+             onmouseout="Image_Out(this, 3, '@Model.ElementAt(i)Name')" 
+        />
+        </td>
+        @*  *@
+        <td class="stars_td">
+        <img 
+             id="Star_4_@Model.ElementAt(i)Name" 
+             class="stars" 
+             src="/Images/Star_Empty.png" 
+             onmouseover="Image_Over(this, 4, '@Model.ElementAt(i)Name')" 
+             onmouseout="Image_Out(this, 4, '@Model.ElementAt(i)Name')" 
+        />
+        </td>
+        @*  *@
+        <td class="stars_td" style="border-right: outset #222288 8px">
+        <img 
+             id="Star_5_@Model.ElementAt(i)Name" 
+             class="stars" 
+             src="/Images/Star_Empty.png" 
+             onmouseover="Image_Over(this, 5, '@Model.ElementAt(i)Name')" 
+             onmouseout="Image_Out(this, 5, '@Model.ElementAt(i)Name')" 
+        />
+        </td>
+    </tr>
     }
 </table>
+<input type="button" value="<--" onclick="Previous_Page()"/>
+<input type="button" value="-->" onclick="Next_Page()" />
