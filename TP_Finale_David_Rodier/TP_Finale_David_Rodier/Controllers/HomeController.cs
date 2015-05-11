@@ -9,7 +9,6 @@ namespace TP_Finale_David_Rodier.Controllers
 {
    public class HomeController : Controller
    {
-      [HttpGet]
       public ActionResult Index()
       {
          Game games = new Game(Session["MainDB"]);
@@ -27,25 +26,6 @@ namespace TP_Finale_David_Rodier.Controllers
             GamesSelect.Add(temp);
          }
          ViewBag.Page = 0;
-         return View(GamesSelect);
-      }
-      [HttpPost]
-      public ActionResult Index(Game game)
-      {
-         Game games = new Game(Session["MainDB"]);
-         games.SelectAll();
-
-         List<Game> GamesSelect = new List<Game>();
-
-         while (games.Next())
-         {
-            Game temp = new Game();
-            temp.ID = games.ID;
-            temp.Name = games.Name;
-            temp.Creator = games.Creator;
-            temp.Image_Path = games.Image_Path;
-            GamesSelect.Add(temp);
-         }
          return View(GamesSelect);
       }
       [HttpGet]

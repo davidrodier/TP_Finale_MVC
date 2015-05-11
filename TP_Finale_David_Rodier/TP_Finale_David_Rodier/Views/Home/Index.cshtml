@@ -5,7 +5,7 @@
 
 <style>
     img {
-        width: 78px;
+        width: 75px;
     }
 
     span {
@@ -14,14 +14,16 @@
     }
 
     td {
-        border: #222288 8px;
-        border-style: outset;
+        border: #222288 5px;
+        border-style: double;
     }
-
+    tr{
+        width:350px;
+    }
     .stars_td {
-        border-top: #222288 8px;
-        border-bottom: #222288 8px;
-        border-style: outset;
+        border-top: #222288 5px;
+        border-bottom: #222288 5px;
+        border-style: double;
         border-left: hidden;
         border-right: hidden;
         padding-right: 3px;
@@ -32,9 +34,6 @@
         font-size: larger;
         cursor: pointer;
         width: 20px;
-    }
-    .Page_1{
-        display:none;
     }
 </style>
 
@@ -57,6 +56,9 @@
         }
     }
     function Next_Page() {
+
+    }
+    function Previous_Page() {
         
     }
 </script>
@@ -66,60 +68,57 @@
 <table>
     @for (int i = 0; i < @Model.Count() ;i++)
     {
-        if ((i % 20) == 0){
-            ViewBag.Page++;
-        }
-    <tr class="Page_@ViewBag.Page">
+    <tr>
         <td><img src=@Model.ElementAt(i).Image_Path /></td>
         <td><span>@Model.ElementAt(i).Name made by @Model.ElementAt(i)Creator</span></td>
         @*  *@
-        <td class="stars_td" style="border-left: outset #222288 8px; ">
+        <td class="stars_td" style="border-left: double #222288 5px; ">
         <img 
-             id="Star_1_@Model.ElementAt(i)Name" 
+             id="Star_1_@Model.ElementAt(i).Name" 
              class="stars" 
              src="/Images/Star_Empty.png" 
-             onmouseover="Image_Over(this, 1, '@Model.ElementAt(i)Name')" 
-             onmouseout="Image_Out(this, 1, '@Model.ElementAt(i)Name')" 
+             onmouseover="Image_Over(this, 1, '@Model.ElementAt(i).Name')" 
+             onmouseout="Image_Out(this, 1, '@Model.ElementAt(i).Name')" 
         />
         </td>
         @*  *@
         <td class="stars_td">
         <img 
-             id="Star_2_@Model.ElementAt(i)Name" 
+             id="Star_2_@Model.ElementAt(i).Name" 
              class="stars" 
              src="/Images/Star_Empty.png" 
-             onmouseover="Image_Over(this, 2, '@Model.ElementAt(i)Name')" 
-             onmouseout="Image_Out(this, 2, '@Model.ElementAt(i)Name')" 
+             onmouseover="Image_Over(this, 2, '@Model.ElementAt(i).Name')" 
+             onmouseout="Image_Out(this, 2, '@Model.ElementAt(i).Name')" 
         />
         </td>
         @*  *@
         <td class="stars_td">
         <img 
-             id="Star_3_@Model.ElementAt(i)Name" 
+             id="Star_3_@Model.ElementAt(i).Name" 
              class="stars" 
              src="/Images/Star_Empty.png" 
-             onmouseover="Image_Over(this, 3, '@Model.ElementAt(i)Name')" 
-             onmouseout="Image_Out(this, 3, '@Model.ElementAt(i)Name')" 
+             onmouseover="Image_Over(this, 3, '@Model.ElementAt(i).Name')" 
+             onmouseout="Image_Out(this, 3, '@Model.ElementAt(i).Name')" 
         />
         </td>
         @*  *@
         <td class="stars_td">
         <img 
-             id="Star_4_@Model.ElementAt(i)Name" 
+             id="Star_4_@Model.ElementAt(i).Name" 
              class="stars" 
              src="/Images/Star_Empty.png" 
-             onmouseover="Image_Over(this, 4, '@Model.ElementAt(i)Name')" 
-             onmouseout="Image_Out(this, 4, '@Model.ElementAt(i)Name')" 
+             onmouseover="Image_Over(this, 4, '@Model.ElementAt(i).Name')" 
+             onmouseout="Image_Out(this, 4, '@Model.ElementAt(i).Name')" 
         />
         </td>
         @*  *@
-        <td class="stars_td" style="border-right: outset #222288 8px">
+        <td class="stars_td" style="border-right: double #222288 5px">
         <img 
-             id="Star_5_@Model.ElementAt(i)Name" 
+             id="Star_5_@Model.ElementAt(i).Name" 
              class="stars" 
              src="/Images/Star_Empty.png" 
-             onmouseover="Image_Over(this, 5, '@Model.ElementAt(i)Name')" 
-             onmouseout="Image_Out(this, 5, '@Model.ElementAt(i)Name')" 
+             onmouseover="Image_Over(this, 5, '@Model.ElementAt(i).Name')" 
+             onmouseout="Image_Out(this, 5, '@Model.ElementAt(i).Name')" 
         />
         </td>
     </tr>
