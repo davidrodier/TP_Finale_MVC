@@ -4,46 +4,59 @@
 }
 
 <style>
-    img{
-        width:75px;
+    img {
+        width: 75px;
     }
-    span{
-        font-family:Arial;
-        font-size:large;
+
+    span {
+        font-family: Arial;
+        font-size: large;
     }
-    td{
-        border:black 1px;
-        border-style:double;
+
+    td {
+        border: black 1px;
+        border-style: double;
     }
-    .stars_td{
-        border:hidden;
+
+    .stars_td {
+        border: hidden;
     }
-    .stars{
-        font-size:larger;
-        cursor:pointer;
+
+    .stars {
+        font-size: larger;
+        cursor: pointer;
+        width: 20px;
     }
 </style>
 
 <script type="text/javascript">
-    function ChangeStar_Over(num, name){
-        document.getElementById("Star_" + num + "_" + name).textContent = "&#9733";
+    function Image_Over(Image, Nb) {
+        Image.src = "/Images/Star_Filled.png";
+        for (var i = 1; i < Nb; i++) {
+            document.getElementById("Star_" + i).src = "/Images/Star_Filled.png";
+        }
     }
-    function ChangeStar_Out(num, name) {
-        document.getElementById("Star_" + num + "_" + name).textContent = "&#9734";
+    function Image_Out(Image, Nb) {
+        Image.src = "/Images/Star_Empty.png";
+        for (var i = 1; i < Nb; i++) {
+            document.getElementById("Star_" + i).src = "/Images/Star_Empty.png";
+        }
     }
 </script>
 
 <h2>Ratings</h2>
 
 <table>
-    @while (Model.Next()){
-        <tr><td><img src=@Model.Image_Path /></td>
+    @while (Model.Next())
+    {
+        <tr>
+            <td><img src=@Model.Image_Path /></td>
             <td><span>@Model.Name made by @Model.Creator</span></td>
-            <td id="Star_1_@Model.Name" class="stars_td" style="border-left: double black 1px"><span class="stars" onmouseover="ChangeStar(1, @Model.Name)" onmouseout="ChangeStar(1, @Model.Name)">&#9734 </span></td>
-            <td id="Star_2_@Model.Name" class="stars_td"><span class="stars" onmouseover="ChangeStar(2, @Model.Name)" onmouseout="ChangeStar(2, @Model.Name)">&#9734 </span></td>
-            <td id="Star_3_@Model.Name" class="stars_td"><span class="stars" onmouseover="ChangeStar(3, @Model.Name)" onmouseout="ChangeStar(3, @Model.Name)">&#9734 </span></td>
-            <td id="Star_4_@Model.Name" class="stars_td"><span class="stars" onmouseover="ChangeStar(4, @Model.Name)" onmouseout="ChangeStar(4, @Model.Name)">&#9734 </span></td>
-            <td id="Star_5_@Model.Name" class="stars_td"><span class="stars" onmouseover="ChangeStar(5, @Model.Name)" onmouseout="ChangeStar(5, @Model.Name)">&#9734 </span></td>
+            <td class="stars_td" style="border-left:black 1px"><img id="Star_1" class="stars" src="/Images/Star_Empty.png" onmouseover="Image_Over(this, 1)" onmouseout="Image_Out(this, 1)" /></td>
+            <td class="stars_td"><img id="Star_2" class="stars" src="/Images/Star_Empty.png" onmouseover="Image_Over(this, 2)" onmouseout="Image_Out(this, 2)" /></td>
+            <td class="stars_td"><img id="Star_3" class="stars" src="/Images/Star_Empty.png" onmouseover="Image_Over(this, 3)" onmouseout="Image_Out(this, 3)" /></td>
+            <td class="stars_td"><img id="Star_4" class="stars" src="/Images/Star_Empty.png" onmouseover="Image_Over(this, 4)" onmouseout="Image_Out(this, 4)" /></td>
+            <td class="stars_td"><img id="Star_5" class="stars" src="/Images/Star_Empty.png" onmouseover="Image_Over(this, 5)" onmouseout="Image_Out(this, 5)" /></td>
         </tr>
     }
 </table>
