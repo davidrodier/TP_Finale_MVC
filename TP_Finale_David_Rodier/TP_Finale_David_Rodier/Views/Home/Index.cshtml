@@ -19,6 +19,7 @@
     }
     tr{
         width:350px;
+        height:100px;
     }
     .stars_td {
         border-top: #222288 5px;
@@ -55,12 +56,6 @@
             document.getElementById("Star_" + i + "_" + Name).src = "/Images/Star_Filled.png"
         }
     }
-    function Next_Page() {
-
-    }
-    function Previous_Page() {
-        
-    }
 </script>
 
 <h2>Ratings</h2>
@@ -70,7 +65,7 @@
     {
     <tr>
         <td><img src=@Model.ElementAt(i).Image_Path /></td>
-        <td><span>@Model.ElementAt(i).Name made by @Model.ElementAt(i)Creator</span></td>
+        <td><span>@Model.ElementAt(i).Name made by @Model.ElementAt(i).Creator</span></td>
         @*  *@
         <td class="stars_td" style="border-left: double #222288 5px; ">
         <img 
@@ -124,5 +119,3 @@
     </tr>
     }
 </table>
-<input type="button" value="<--" onclick="Previous_Page()"/>
-<input type="button" value="-->" onclick="Next_Page()" />
