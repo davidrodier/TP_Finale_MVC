@@ -47,12 +47,12 @@ namespace TP_Finale_David_Rodier.Controllers
             }
             else
             {
-               ViewBag.Error = "Mauvais mot de passe";
+               ViewBag.Error = "Mot de passe eronné";
             }
          }
          else
          {
-            ViewBag.Error = "Mauvais nom d'usager";
+            ViewBag.Error = "Nom d'usager eronné";
          }
          return View();
       }

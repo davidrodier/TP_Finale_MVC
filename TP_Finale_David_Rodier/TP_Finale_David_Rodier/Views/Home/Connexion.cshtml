@@ -20,7 +20,7 @@
             @Html.LabelFor(model => model.Username, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Username)
-                @Html.ValidationMessageFor(model => model.Username) @if (ViewBag.Error == "Mauvais nom d'usager"){<span style="color:coral">@ViewBag.Error</span>}
+                @Html.ValidationMessageFor(model => model.Username) @if (ViewBag.Error == "Nom d'usager eronné"){<span style="color: #b94a48">@ViewBag.Error</span>}
             </div>
         </div>
 
@@ -28,7 +28,7 @@
             @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Password)
-                @Html.ValidationMessageFor(model => model.Password) @if (ViewBag.Error == "Mauvais mot de passe"){<span style="color:coral">@ViewBag.Error</span>}
+                @Html.ValidationMessageFor(model => model.Password) @if (ViewBag.Error == "Mot de passe eronné"){<span style="color: #b94a48">@ViewBag.Error</span>}
             </div>
         </div>
 
