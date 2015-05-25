@@ -7,22 +7,18 @@
     img {
         width: 75px;
     }
-
     span {
         font-family: Arial;
         font-size: large;
     }
-
     td {
         border: #222288 5px;
         border-style: double;
     }
-
     tr {
         width: 350px;
         height: 100px;
     }
-
     .stars_td {
         border-top: #222288 5px;
         border-bottom: #222288 5px;
@@ -32,7 +28,6 @@
         padding-right: 3px;
         padding-left: 3px;
     }
-
     .stars {
         font-size: larger;
         cursor: pointer;
@@ -47,38 +42,30 @@
             document.getElementById("Star_" + i + "_" + Name).src = "/Images/Star_Filled.png";
         }
     }
-    function Image_Out(Image, Nb, Name) {
-        Image.src = "/Images/Star_Empty.png";
-        for (var i = 1; i < Nb; i++) {
-            document.getElementById("Star_" + i + "_" + Name).src = "/Images/Star_Empty.png";
-        }
-        Reset(Name, document.getElementById("Star_1_" + Name).alt, Image);
-    }
     function Set_Image(Rating, Name) {
-        var temp = Rating;
-        for (var i = 1; i < Rating; i++) {
-            document.getElementById("Star_" + i + "_" + Name).src = "/Images/Star_Filled.png"
+        var temp = Rating+1;
+        for (var i = 1; i <= Rating; i++) {
+            document.getElementById("Star_" + i + "_" + Name).src = "/Images/Star_Filled.png";
         }
-        for (var i = temp; i < 5; i++) {
-            document.getElementById("Star_" + i + "_" + Name).src = "/Images/Star_Empty.png"
-        }
-    }
-    function Reset(Name, Rating, Image) {
-        var temp = Rating;
-        for (var i = 1; i < Rating; i++) {
-            docuement.getElementById("Star_" + i + "_" + Name).src = "/Images/Star_Filled.png"
+        for (var i = temp; i <= 5; i++) {
+            document.getElementById("Star_" + i + "_" + Name).src = "/Images/Star_Empty.png";
         }
     }
 </script>
 
-<h2>Ratings</h2>
+<h2 id="test">Ratings</h2>
 
 <table>
     @for (int i = 0; i < @Model.Count(); i++)
     {
         <tr>
             <td><img src=@Model.ElementAt(i).Image_Path /></td>
-            <td><span>@Model.ElementAt(i).Name made by @Model.ElementAt(i).Creator</span></td>
+            <td><span>@Model.ElementAt(i).Name made by @Model.ElementAt(i).Creator</span>
+            @if (Session["LogedType"].ToString() == "ADMIN")
+            {
+                <img src="" />
+            }
+            </td>
             @*  *@
             <td class="stars_td" style="border-left: double #222288 5px; ">
                 @if (Model.ElementAt(i).Rating >= 1)
@@ -86,7 +73,7 @@
                     <img id="Star_1_@Model.ElementAt(i).Name"
                          class="stars"
                          src="/Images/Star_Filled.png"
-                         onmouseout="Set_Image('@Model.ElementAt(i).Rating.ToString()', '@Model.ElementAt(i).Name'" />
+                         onmouseout="Set_Image(@Model.ElementAt(i).Rating, '@Model.ElementAt(i).Name')" />
                 }
                 else
                 {
@@ -94,7 +81,7 @@
                          class="stars"
                          src="/Images/Star_Empty.png"
                          onmouseover="Image_Over(this, 1, '@Model.ElementAt(i).Name')"
-                         onmouseout="Set_Image('@Model.ElementAt(i).Rating.ToString()', '@Model.ElementAt(i).Name'" />
+                         onmouseout="Set_Image(@Model.ElementAt(i).Rating, '@Model.ElementAt(i).Name')" />
                 }
             </td>
             @*  *@
@@ -104,7 +91,7 @@
                     <img id="Star_2_@Model.ElementAt(i).Name"
                          class="stars"
                          src="/Images/Star_Filled.png"
-                         onmouseout="Set_Image('@Model.ElementAt(i).Rating.ToString()', '@Model.ElementAt(i).Name'" />
+                         onmouseout="Set_Image(@Model.ElementAt(i).Rating, '@Model.ElementAt(i).Name')" />
                 }
                 else
                 {
@@ -112,7 +99,7 @@
                          class="stars"
                          src="/Images/Star_Empty.png"
                          onmouseover="Image_Over(this, 2, '@Model.ElementAt(i).Name')"
-                         onmouseout="Set_Image('@Model.ElementAt(i).Rating.ToString()', '@Model.ElementAt(i).Name'" />
+                         onmouseout="Set_Image(@Model.ElementAt(i).Rating, '@Model.ElementAt(i).Name')" />
                 }
             </td>
             @*  *@
@@ -122,7 +109,7 @@
                     <img id="Star_3_@Model.ElementAt(i).Name"
                          class="stars"
                          src="/Images/Star_Filled.png"
-                         onmouseout="Set_Image('@Model.ElementAt(i).Rating.ToString()', '@Model.ElementAt(i).Name'" />
+                         onmouseout="Set_Image(@Model.ElementAt(i).Rating, '@Model.ElementAt(i).Name')" />
                 }
                 else
                 {
@@ -130,7 +117,7 @@
                          class="stars"
                          src="/Images/Star_Empty.png"
                          onmouseover="Image_Over(this, 3, '@Model.ElementAt(i).Name')"
-                         onmouseout="Set_Image('@Model.ElementAt(i).Rating.ToString()', '@Model.ElementAt(i).Name'" />
+                         onmouseout="Set_Image(@Model.ElementAt(i).Rating, '@Model.ElementAt(i).Name')" />
                 }
             </td>
             @*  *@
@@ -140,7 +127,7 @@
                     <img id="Star_4_@Model.ElementAt(i).Name"
                          class="stars"
                          src="/Images/Star_Filled.png"
-                         onmouseout="Set_Image('@Model.ElementAt(i).Rating.ToString()', '@Model.ElementAt(i).Name'" />
+                         onmouseout="Set_Image(@Model.ElementAt(i).Rating, '@Model.ElementAt(i).Name')" />
                 }
                 else
                 {
@@ -148,7 +135,7 @@
                          class="stars"
                          src="/Images/Star_Empty.png"
                          onmouseover="Image_Over(this, 4, '@Model.ElementAt(i).Name')"
-                         onmouseout="Set_Image('@Model.ElementAt(i).Rating.ToString()', '@Model.ElementAt(i).Name'" />
+                         onmouseout="Set_Image(@Model.ElementAt(i).Rating, '@Model.ElementAt(i).Name')" />
                 }
             </td>
             @*  *@
@@ -158,7 +145,7 @@
                     <img id="Star_5_@Model.ElementAt(i).Name"
                          class="stars"
                          src="/Images/Star_Filled.png"
-                         onmouseout="Set_Image('@Model.ElementAt(i).Rating.ToString()', '@Model.ElementAt(i).Name'" />
+                         onmouseout="Set_Image(@Model.ElementAt(i).Rating, '@Model.ElementAt(i).Name')" />
                 }
                 else
                 {
@@ -166,7 +153,7 @@
                          class="stars"
                          src="/Images/Star_Empty.png"
                          onmouseover="Image_Over(this, 5, '@Model.ElementAt(i).Name')"
-                         onmouseout="Set_Image('@Model.ElementAt(i).Rating.ToString()', '@Model.ElementAt(i).Name'" />
+                         onmouseout="Set_Image(@Model.ElementAt(i).Rating, '@Model.ElementAt(i).Name')" />
                 }
             </td>
         </tr>

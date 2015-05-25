@@ -43,6 +43,7 @@ namespace TP_Finale_David_Rodier.Controllers
             if (users.Check_Password(log.Username, log.Password))
             {
                Session["LogedUser"] = log.Username;
+               Session["LogedType"] = log.Type;
                ViewBag.Error = "";
                return RedirectToAction("Index");
             }
