@@ -38,12 +38,13 @@ namespace TP_Finale_David_Rodier.Controllers
       public ActionResult Connexion(Login log)
       {
          User users = new User(Session["MainDB"]);
+         users.SelectAll();
          if (users.Username_Exist(log.Username))
          {
             if (users.Check_Password(log.Username, log.Password))
             {
                Session["LogedUser"] = log.Username;
-               Session["LogedType"] = log.Type;
+               Session["LogedType"] = users.Select_Type(log.Username);
                ViewBag.Error = "";
                return RedirectToAction("Index");
             }

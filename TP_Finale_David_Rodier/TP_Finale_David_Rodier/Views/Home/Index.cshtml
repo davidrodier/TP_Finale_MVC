@@ -7,18 +7,22 @@
     img {
         width: 75px;
     }
+
     span {
         font-family: Arial;
         font-size: large;
     }
+
     td {
         border: #222288 5px;
         border-style: double;
     }
+
     tr {
         width: 350px;
         height: 100px;
     }
+
     .stars_td {
         border-top: #222288 5px;
         border-bottom: #222288 5px;
@@ -28,10 +32,15 @@
         padding-right: 3px;
         padding-left: 3px;
     }
+
     .stars {
         font-size: larger;
         cursor: pointer;
         width: 20px;
+    }
+    .Icon_Manage {
+        width:20px;
+        height:20px;
     }
 </style>
 
@@ -43,7 +52,7 @@
         }
     }
     function Set_Image(Rating, Name) {
-        var temp = Rating+1;
+        var temp = Rating + 1;
         for (var i = 1; i <= Rating; i++) {
             document.getElementById("Star_" + i + "_" + Name).src = "/Images/Star_Filled.png";
         }
@@ -60,11 +69,12 @@
     {
         <tr>
             <td><img src=@Model.ElementAt(i).Image_Path /></td>
-            <td><span>@Model.ElementAt(i).Name made by @Model.ElementAt(i).Creator</span>
-            @if (Session["LogedType"].ToString() == "ADMIN")
-            {
-                <img src="" />
-            }
+            <td>
+                <span>@Model.ElementAt(i).Name made by @Model.ElementAt(i).Creator</span>
+                @if (Session["LogedType"].ToString() == "ADMIN")
+                {
+                    <td style="border-left:hidden; border-right:hidden; padding-right:10px;"><img class="Icon_Manage" src="/Images/delete.png" /></td><td style="border-left:hidden; padding-right:10px;"><img class="Icon_Manage" src="/Images/edit.png" /></td>
+                }
             </td>
             @*  *@
             <td class="stars_td" style="border-left: double #222288 5px; ">

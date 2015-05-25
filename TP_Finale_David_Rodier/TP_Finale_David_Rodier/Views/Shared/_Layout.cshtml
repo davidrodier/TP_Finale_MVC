@@ -25,8 +25,17 @@
                     
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Inscription", "Inscription", "Home")</li>
-                    <li>@Html.ActionLink("Connexion", "Connexion", "Home")</li>
+                    @if (Session["LogedUser"].ToString() = "Rate my Games")
+                    { 
+                        <li>@Html.ActionLink("Inscription", "Inscription", "Home")</li>
+                        <li>@Html.ActionLink("Connexion", "Connexion", "Home")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Déconnection", "Index", "Home")</li>
+                        Session["LogedUser"] = "Rate my Games";
+                        Session["LogedType"] = "USER";
+                    }
                 </ul>
             </div>
         </div>
