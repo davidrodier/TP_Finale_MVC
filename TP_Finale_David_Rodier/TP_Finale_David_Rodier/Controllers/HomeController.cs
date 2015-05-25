@@ -23,6 +23,7 @@ namespace TP_Finale_David_Rodier.Controllers
             temp.Name = games.Name;
             temp.Creator = games.Creator;
             temp.Image_Path = games.Image_Path;
+            temp.Rating = games.Rating;
             GamesSelect.Add(temp);
          }
          ViewBag.Page = 0;

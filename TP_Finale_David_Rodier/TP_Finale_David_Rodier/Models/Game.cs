@@ -36,6 +36,7 @@ namespace TP_Finale_David_Rodier.Models
          Name = this["NAME"];
          Creator = this["CREATOR"];
          Image_Path = this["COVER"];
+         Rating = int.Parse(this["RATING"]);
       }
       public override void Insert()
       {
