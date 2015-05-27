@@ -13,17 +13,17 @@
         font-size: large;
     }
 
-    td {
+    //td {
         border: #222288 5px;
         border-style: double;
     }
 
-    tr {
+    //tr {
         width: 350px;
         height: 100px;
     }
 
-    .stars_td {
+    //.stars_td {
         border-top: #222288 5px;
         border-bottom: #222288 5px;
         border-style: double;
@@ -64,7 +64,7 @@
 
 <h2 id="test">Ratings</h2>
 
-<table>
+<table class="table-striped">
     @for (int i = 0; i < @Model.Count(); i++)
     {
         <tr>
