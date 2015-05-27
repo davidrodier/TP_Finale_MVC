@@ -13,34 +13,16 @@
         font-size: large;
     }
 
-    //td {
-        border: #222288 5px;
-        border-style: double;
-    }
-
-    //tr {
-        width: 350px;
-        height: 100px;
-    }
-
-    //.stars_td {
-        border-top: #222288 5px;
-        border-bottom: #222288 5px;
-        border-style: double;
-        border-left: hidden;
-        border-right: hidden;
-        padding-right: 3px;
-        padding-left: 3px;
-    }
-
     .stars {
         font-size: larger;
         cursor: pointer;
         width: 20px;
     }
+
     .Icon_Manage {
-        width:20px;
-        height:20px;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
     }
 </style>
 
@@ -60,112 +42,142 @@
             document.getElementById("Star_" + i + "_" + Name).src = "/Images/Star_Empty.png";
         }
     }
+    function Delete_Click(Img) {
+        if (Img.alt == "Unchecked") {
+            Img.src = "/Images/accept.png";
+            Img.alt = "Checked";
+        }
+        else {
+            Img.src = "/Images/delete.png";
+            Img.alt = "Unchecked";
+        }
+    }
 </script>
 
 <h2 id="test">Ratings</h2>
 
-<table class="table-striped">
-    @for (int i = 0; i < @Model.Count(); i++)
-    {
-        <tr>
-            <td><img src=@Model.ElementAt(i).Image_Path /></td>
-            <td>
-                <span>@Model.ElementAt(i).Name made by @Model.ElementAt(i).Creator</span>
-                @if (Session["LogedType"].ToString() == "ADMIN")
-                {
-                    <td style="border-left:hidden; border-right:hidden; padding-right:10px;"><img class="Icon_Manage" src="/Images/delete.png" /></td><td style="border-left:hidden; padding-right:10px;"><img class="Icon_Manage" src="/Images/edit.png" /></td>
-                }
-            </td>
-            @*  *@
-            <td class="stars_td" style="border-left: double #222288 5px; ">
-                @if (Model.ElementAt(i).Rating >= 1)
-                {
-                    <img id="Star_1_@Model.ElementAt(i).Name"
-                         class="stars"
-                         src="/Images/Star_Filled.png"
-                         onmouseout="Set_Image(@Model.ElementAt(i).Rating, '@Model.ElementAt(i).Name')" />
-                }
-                else
-                {
-                    <img id="Star_1_@Model.ElementAt(i).Name"
-                         class="stars"
-                         src="/Images/Star_Empty.png"
-                         onmouseover="Image_Over(this, 1, '@Model.ElementAt(i).Name')"
-                         onmouseout="Set_Image(@Model.ElementAt(i).Rating, '@Model.ElementAt(i).Name')" />
-                }
-            </td>
-            @*  *@
-            <td class="stars_td">
-                @if (Model.ElementAt(i).Rating >= 2)
-                {
-                    <img id="Star_2_@Model.ElementAt(i).Name"
-                         class="stars"
-                         src="/Images/Star_Filled.png"
-                         onmouseout="Set_Image(@Model.ElementAt(i).Rating, '@Model.ElementAt(i).Name')" />
-                }
-                else
-                {
-                    <img id="Star_2_@Model.ElementAt(i).Name"
-                         class="stars"
-                         src="/Images/Star_Empty.png"
-                         onmouseover="Image_Over(this, 2, '@Model.ElementAt(i).Name')"
-                         onmouseout="Set_Image(@Model.ElementAt(i).Rating, '@Model.ElementAt(i).Name')" />
-                }
-            </td>
-            @*  *@
-            <td class="stars_td">
-                @if (Model.ElementAt(i).Rating >= 3)
-                {
-                    <img id="Star_3_@Model.ElementAt(i).Name"
-                         class="stars"
-                         src="/Images/Star_Filled.png"
-                         onmouseout="Set_Image(@Model.ElementAt(i).Rating, '@Model.ElementAt(i).Name')" />
-                }
-                else
-                {
-                    <img id="Star_3_@Model.ElementAt(i).Name"
-                         class="stars"
-                         src="/Images/Star_Empty.png"
-                         onmouseover="Image_Over(this, 3, '@Model.ElementAt(i).Name')"
-                         onmouseout="Set_Image(@Model.ElementAt(i).Rating, '@Model.ElementAt(i).Name')" />
-                }
-            </td>
-            @*  *@
-            <td class="stars_td">
-                @if (Model.ElementAt(i).Rating >= 4)
-                {
-                    <img id="Star_4_@Model.ElementAt(i).Name"
-                         class="stars"
-                         src="/Images/Star_Filled.png"
-                         onmouseout="Set_Image(@Model.ElementAt(i).Rating, '@Model.ElementAt(i).Name')" />
-                }
-                else
-                {
-                    <img id="Star_4_@Model.ElementAt(i).Name"
-                         class="stars"
-                         src="/Images/Star_Empty.png"
-                         onmouseover="Image_Over(this, 4, '@Model.ElementAt(i).Name')"
-                         onmouseout="Set_Image(@Model.ElementAt(i).Rating, '@Model.ElementAt(i).Name')" />
-                }
-            </td>
-            @*  *@
-            <td class="stars_td" style="border-right: double #222288 5px">
-                @if (Model.ElementAt(i).Rating >= 5)
-                {
-                    <img id="Star_5_@Model.ElementAt(i).Name"
-                         class="stars"
-                         src="/Images/Star_Filled.png"
-                         onmouseout="Set_Image(@Model.ElementAt(i).Rating, '@Model.ElementAt(i).Name')" />
-                }
-                else
-                {
-                    <img id="Star_5_@Model.ElementAt(i).Name"
-                         class="stars"
-                         src="/Images/Star_Empty.png"
-                         onmouseover="Image_Over(this, 5, '@Model.ElementAt(i).Name')"
-                         onmouseout="Set_Image(@Model.ElementAt(i).Rating, '@Model.ElementAt(i).Name')" />
-                }
-            </td>
-        </tr>
-    }
-</table>
+<div class="container">
+    <div class="modal fade" id="modifyModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modify</h4>
+                </div>
+                <div class="modal-body">
+                    @*Put the content here*@
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <table class="table-striped">
+        @for (int i = 0; i < @Model.Count(); i++)
+        {
+            <tr>
+                <td><img src=@Model.ElementAt(i).Image_Path style="height:100px;" /></td>
+                <td>
+                    <span>@Model.ElementAt(i).Name made by @Model.ElementAt(i).Creator</span>
+                </td>
+                    @if (Session["LogedType"].ToString() == "ADMIN")
+                    {
+                        <td style="padding-right:10px;"><img class="Icon_Manage" src="/Images/delete.png" onclick="Delete_Click(this)" alt="Unchecked" /></td>
+                        <td><img class="Icon_Manage" data-toggle="modal" data-target="#modifyModal" src="/Images/edit.png" /></td>
+                        <td style="padding-right:10px;" />
+                    }
+                    @*  *@
+                    <td class="stars_td">
+                        @if (Model.ElementAt(i).Rating >= 1)
+                        {
+                            <img id="Star_1_@Model.ElementAt(i).Name"
+                                 class="stars"
+                                 src="/Images/Star_Filled.png"
+                                 onmouseout="Set_Image(@Model.ElementAt(i).Rating, '@Model.ElementAt(i).Name')" />
+                        }
+                        else
+                        {
+                            <img id="Star_1_@Model.ElementAt(i).Name"
+                                 class="stars"
+                                 src="/Images/Star_Empty.png"
+                                 onmouseover="Image_Over(this, 1, '@Model.ElementAt(i).Name')"
+                                 onmouseout="Set_Image(@Model.ElementAt(i).Rating, '@Model.ElementAt(i).Name')" />
+                        }
+                    </td>
+                    @*  *@
+                    <td class="stars_td">
+                        @if (Model.ElementAt(i).Rating >= 2)
+                        {
+                            <img id="Star_2_@Model.ElementAt(i).Name"
+                                 class="stars"
+                                 src="/Images/Star_Filled.png"
+                                 onmouseout="Set_Image(@Model.ElementAt(i).Rating, '@Model.ElementAt(i).Name')" />
+                        }
+                        else
+                        {
+                            <img id="Star_2_@Model.ElementAt(i).Name"
+                                 class="stars"
+                                 src="/Images/Star_Empty.png"
+                                 onmouseover="Image_Over(this, 2, '@Model.ElementAt(i).Name')"
+                                 onmouseout="Set_Image(@Model.ElementAt(i).Rating, '@Model.ElementAt(i).Name')" />
+                        }
+                    </td>
+                    @*  *@
+                    <td class="stars_td">
+                        @if (Model.ElementAt(i).Rating >= 3)
+                        {
+                            <img id="Star_3_@Model.ElementAt(i).Name"
+                                 class="stars"
+                                 src="/Images/Star_Filled.png"
+                                 onmouseout="Set_Image(@Model.ElementAt(i).Rating, '@Model.ElementAt(i).Name')" />
+                        }
+                        else
+                        {
+                            <img id="Star_3_@Model.ElementAt(i).Name"
+                                 class="stars"
+                                 src="/Images/Star_Empty.png"
+                                 onmouseover="Image_Over(this, 3, '@Model.ElementAt(i).Name')"
+                                 onmouseout="Set_Image(@Model.ElementAt(i).Rating, '@Model.ElementAt(i).Name')" />
+                        }
+                    </td>
+                    @*  *@
+                    <td class="stars_td">
+                        @if (Model.ElementAt(i).Rating >= 4)
+                        {
+                            <img id="Star_4_@Model.ElementAt(i).Name"
+                                 class="stars"
+                                 src="/Images/Star_Filled.png"
+                                 onmouseout="Set_Image(@Model.ElementAt(i).Rating, '@Model.ElementAt(i).Name')" />
+                        }
+                        else
+                        {
+                            <img id="Star_4_@Model.ElementAt(i).Name"
+                                 class="stars"
+                                 src="/Images/Star_Empty.png"
+                                 onmouseover="Image_Over(this, 4, '@Model.ElementAt(i).Name')"
+                                 onmouseout="Set_Image(@Model.ElementAt(i).Rating, '@Model.ElementAt(i).Name')" />
+                        }
+                    </td>
+                    @*  *@
+                    <td class="stars_td">
+                        @if (Model.ElementAt(i).Rating >= 5)
+                        {
+                            <img id="Star_5_@Model.ElementAt(i).Name"
+                                 class="stars"
+                                 src="/Images/Star_Filled.png"
+                                 onmouseout="Set_Image(@Model.ElementAt(i).Rating, '@Model.ElementAt(i).Name')" />
+                        }
+                        else
+                        {
+                            <img id="Star_5_@Model.ElementAt(i).Name"
+                                 class="stars"
+                                 src="/Images/Star_Empty.png"
+                                 onmouseover="Image_Over(this, 5, '@Model.ElementAt(i).Name')"
+                                 onmouseout="Set_Image(@Model.ElementAt(i).Rating, '@Model.ElementAt(i).Name')" />
+                        }
+                    </td>
+                </tr>
+        }
+    </table>
+</div>
