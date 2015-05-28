@@ -100,7 +100,7 @@
                         <div class="col-lg-4">
                             <img id="Image_PreLoad" src="/Images/Null.png" /><br />
                             <button type="button" class="btn btn-warning" onclick="document.getElementById('Image_path').click()">Choose File</button>
-                            <input id="Image_path" style="display:none;" onchange="preload(this)" type="file" />
+                            <input id="Image_path" style="display:none;" onchange="preload(this);" type="file" />
                         </div>
                         <div class="col-lg-2"></div>
                     </div>
@@ -122,7 +122,11 @@
                 </td>
                 @if (Session["LogedType"].ToString() == "ADMIN")
                 {
-                    <td style="padding-right:10px;"><img class="Icon_Manage" src="/Images/delete.png" onclick="Delete_Click(this)" alt="Unchecked" /></td>
+                    <td style="padding-right:10px;">
+                        <img class="Icon_Manage" src="/Images/delete.png" onclick="this.style.display='none'; document.getElementById('@Model.ElementAt(i).ID.ToString()').style.display='block';" alt="Unchecked" style="display:block"/>
+                        <img id="@Model.ElementAt(i).ID.ToString()" class="Icon_Manage" src="/Images/accept.png" onclick="document.getElementById('@Model.ElementAt(i).Name.ToString() Delete_Link').click()" alt="Unchecked" style="display:none;"/>
+                        <a id="@Model.ElementAt(i).Name.ToString() Delete_Link"type="Game" href="/Home/DeleteGame?name=@Model.ElementAt(i).Name&creator=@Model.ElementAt(i).Creator"></a>
+                    </td>
                     <td><img class="Icon_Manage" data-toggle="modal" data-target="#modifyModal" src="/Images/edit.png" /></td>
                     <td style="padding-right:10px;" />
                 }

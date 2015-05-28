@@ -34,6 +34,21 @@ namespace TP_Finale_David_Rodier.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public ActionResult DeleteGame(String name, String creator)
+        {
+            Game game = new Game();
+            game.Name = name;
+            game.Creator = creator;
+            return View(game);
+        }
+        [HttpPost]
+        public ActionResult DeleteGame(Game game)
+        {
+            Game games = new Game(Session["MainDB"]);
+            games.DeleteRecordName(game.Name, game.Creator);
+            return RedirectToAction("Index");
+        }
         [HttpPost]
         public ActionResult CreateGame(Game game)
         {
