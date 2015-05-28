@@ -22,7 +22,10 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    
+                    @if (Session["LogedType"].ToString() == "ADMIN")
+                    {
+                        <li>@Html.ActionLink("Add Game", "CreateGame", "Home")</li>
+                    }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (Session["LogedUser"].ToString() == "Rate my Games")

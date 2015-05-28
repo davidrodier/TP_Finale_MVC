@@ -1,0 +1,82 @@
+﻿@model TP_Finale_David_Rodier.Models.Game
+
+@{
+    ViewBag.Title = "CreateGame";
+}
+
+<h2>CreateGame</h2>
+
+<style>
+    #Image_PreLoad {
+        width: 102px;
+        height: 140px;
+        border:black solid 1px;
+    }
+</style>
+<script type="text/javascript">
+    function preload(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#Image_PreLoad').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+            reader.
+        }
+    }
+
+    $("#imgInp").change(function () {
+        readURL(this);
+    });
+</script>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Creator, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Creator)
+                @Html.ValidationMessageFor(model => model.Creator)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Image</label>
+            <div class="col-md-10">
+                <img id="Image_PreLoad" src="/Images/Null.png" /><br />
+                <input id="Image_Path" name="Image_Path" style="display:none;" onchange="preload(this);" type="file" />
+                <input type="button" class="btn btn-warning" onclick="document.getElementById('Image_Path').click();" value="Choose File"/>
+                @Html.ValidationMessageFor(model => model.Image_Path)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

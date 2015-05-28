@@ -21,7 +21,7 @@ namespace TP_Finale_David_Rodier
       protected void Session_Start()
       {
          Session["LogedUser"] = "Rate my Games";
-         Session["LogedType"] = "USER";
+         Session["LogedType"] = "ADMIN";
          string DB_Path = Server.MapPath(@"~\App_Data\MainDB.mdf");
          Session["MainDB"] = @"Data Source=(LocalDB)\v11.0;AttachDbFilename='" + DB_Path + "'; Integrated Security=true";
       }

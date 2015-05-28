@@ -211,6 +211,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\Inscription.cshtml" />
     <Content Include="Views\Home\Connexion.cshtml" />
+    <Content Include="Views\Home\CreateGame.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
