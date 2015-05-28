@@ -30,6 +30,27 @@ namespace TP_Finale_David_Rodier.Controllers
             return View(GamesSelect);
         }
         [HttpGet]
+        public ActionResult UpdateGame(String name, String creator, int id)
+        {
+            Game game = new Game();
+            game.Name = name;
+            game.Creator = creator;
+            game.ID = id;
+
+            String s = Session["LogedUser"].ToString() + Session["LogedType"].ToString();
+
+            return View(game);
+        }
+        [HttpPost]
+        public ActionResult UpdateGame(Game game)
+        {
+            Game games = new Game(Session["MainDB"]);
+            games.SelectAll();
+            games.UpdateRecord_Game(game.ID, game.Name, game.Creator);
+
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
         public ActionResult CreateGame()
         {
             return View();

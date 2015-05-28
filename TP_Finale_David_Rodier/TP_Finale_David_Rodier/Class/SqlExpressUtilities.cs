@@ -236,6 +236,29 @@ namespace Labo2.Class
             return NonQuerySQL(SQL);
         }
 
+        public int UpdateRecord_Game(params object[] FieldsValues)
+        {
+            String SQL = "UPDATE " + SQLTableName + " ";
+            SQL += "SET ";
+            int nb_fields = FieldsValues.Length;
+            for (int i = 1; i < 3; i++)
+            {              
+                SQL += "[" + FieldsNames[i+1] + "] = ";
+                Type type = FieldsValues[i].GetType();
+                if (SQLHelper.IsNumericType(type))
+                    SQL += FieldsValues[i].ToString().Replace(',', '.');
+                else
+                    if (type == typeof(DateTime))
+                        SQL += "'" + SQLHelper.DateSQLFormat((DateTime)FieldsValues[i]) + "'";
+                    else
+                        SQL += "'" + SQLHelper.PrepareForSql(FieldsValues[i].ToString()) + "'";
+                if (i < (nb_fields - 1)) SQL += ", ";
+            }
+            SQL += " WHERE [" + FieldsNames[0] + "] = " + FieldsValues[0];
+
+            return NonQuerySQL(SQL);
+        }
+
         // Effacer l'enregistrement d'id ID
         public void DeleteRecordByID(String ID)
         {

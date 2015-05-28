@@ -213,6 +213,7 @@
     <Content Include="Views\Home\Connexion.cshtml" />
     <Content Include="Views\Home\CreateGame.cshtml" />
     <Content Include="Views\Home\DeleteGame.cshtml" />
+    <Content Include="Views\Home\UpdateGame.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
