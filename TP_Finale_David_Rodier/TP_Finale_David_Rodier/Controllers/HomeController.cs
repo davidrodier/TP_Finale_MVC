@@ -55,6 +55,12 @@ namespace TP_Finale_David_Rodier.Controllers
         {
             return View();
         }
+        public ActionResult Deco()
+        {
+            Session["LogedUser"] = null;
+            Session["LogedType"] = null;
+            return RedirectToAction("Index");
+        }
         [HttpGet]
         public ActionResult DeleteGame(String name, String creator)
         {

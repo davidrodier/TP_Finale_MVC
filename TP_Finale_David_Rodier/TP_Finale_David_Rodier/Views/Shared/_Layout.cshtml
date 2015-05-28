@@ -31,14 +31,14 @@
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     @if (Session["LogedType"] != null)
                     {
-                        @if (Session["LogedType"].ToString() == "ADMIN")
+                        if (Session["LogedType"].ToString() == "ADMIN")
                         {
                             <li>@Html.ActionLink("Add Game", "CreateGame", "Home")</li>
                         }
                     }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    @if (Session["LogedUser"] != null)
+                    @if (Session["LogedUser"] == null)
                     {
                         <li>@Html.ActionLink("Inscription", "Inscription", "Home")</li>
                         <li>@Html.ActionLink("Connexion", "Connexion", "Home")</li>
@@ -46,7 +46,7 @@
                     }
                     else
                     {
-                        <li>@Html.ActionLink("Déconnection", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Déconnection", "Deco", "Home")</li>
                         //Session["LogedUser"] = null;
                         //Session["LogedType"] = null;
                     }
