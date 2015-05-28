@@ -17,27 +17,38 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink(Session["LogedUser"].ToString(), "Index", "Home", null, new { @class = "navbar-brand" })
+                @if(Session["LogedUser"] != null)
+                {
+                    @Html.ActionLink(Session["LogedUser"].ToString(), "Index", "Home", null, new { @class = "navbar-brand" })
+                }
+                else
+                {
+                    @Html.ActionLink("Rate My Games", "Index", "Home", null, new { @class = "navbar-brand" })
+                }
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    @if (Session["LogedType"].ToString() == "ADMIN")
+                    @if (Session["LogedType"] != null)
                     {
-                        <li>@Html.ActionLink("Add Game", "CreateGame", "Home")</li>
+                        @if (Session["LogedType"].ToString() == "ADMIN")
+                        {
+                            <li>@Html.ActionLink("Add Game", "CreateGame", "Home")</li>
+                        }
                     }
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    @if (Session["LogedUser"].ToString() == "Rate my Games")
-                    { 
+                    @if (Session["LogedUser"] != null)
+                    {
                         <li>@Html.ActionLink("Inscription", "Inscription", "Home")</li>
                         <li>@Html.ActionLink("Connexion", "Connexion", "Home")</li>
+
                     }
                     else
                     {
                         <li>@Html.ActionLink("Déconnection", "Index", "Home")</li>
-                        Session["LogedUser"] = "Rate my Games";
-                        Session["LogedType"] = "USER";
+                        //Session["LogedUser"] = null;
+                        //Session["LogedType"] = null;
                     }
                 </ul>
             </div>
